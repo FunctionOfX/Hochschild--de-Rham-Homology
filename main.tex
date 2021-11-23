@@ -1,0 +1,343 @@
+\documentclass[draft]{article}
+\usepackage{import}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}        
+\usepackage{tikz-cd}  	
+\usepackage[all]{xy}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{stmaryrd}
+\usepackage{enumitem}
+\usepackage{rotating}
+\usepackage{scrextend}
+\usepackage{etoolbox}
+\deffootnotemark{\textsuperscript{[\thefootnotemark]}}
+\usetikzlibrary{matrix}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{formula}[theorem]{Formula}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{examples}[theorem]{Examples}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{convention}[theorem]{Convention}
+\DeclareMathOperator*{\supp}{supp}
+\DeclareMathOperator{\Hom}{{Hom}}
+\DeclareMathOperator{\IC}{{\textbf{IC}}}
+\DeclareMathOperator{\Ext}{{Ext}}
+\DeclareMathOperator{\Modu}{{mod}}
+\DeclareMathOperator{\End}{{End}}
+\DeclareMathOperator{\RHom}{{RHom}}
+\DeclareMathOperator{\Diff}{{Diff}}
+\DeclareMathOperator{\REnd}{{REnd}}
+\DeclareMathOperator{\Image}{{Im}}
+\DeclareMathOperator{\Spec}{{Spec}}
+\DeclareMathOperator{\Ham}{{Ham}}
+\DeclareMathOperator{\heart}{\ensuremath\heartsuit}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\HH}{\mathbf{HH}}
+\DeclareMathOperator{\HP}{\mathbf{HP}}
+\newcommand{\doubleh}{[\![ \hbar ]\!]}
+\newcommand{\OhX}{\mathcal{O}_\hbar(X)}
+\newcommand{\MXh}{M(X)\doubleh}
+\newcommand{\MhX}{M_\hbar(X)}
+\newcommand{\OXh}{\mathcal{O}(X)\doubleh}
+
+
+\title{\textbf{Hochschild--de Rham Homology}}
+\author{Haiping Yang}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We define an analogue for Hochschild homology of a construction of Etingof-Schedler which enhances the (zeroth) Poisson homology to a local version, defined using a specific $D$-module. This uses another $D$-module $\MhX$ and yields a new version of Hochschild homology with desirable features, called \textit{Hochschild--de Rham} homology. In general, the Hochschild--de Rham homology agrees with the ordinary Hochschild homology in degree 0 when $X$ is affine. We study in detail the case of certain symplectic resolutions and show that Poisson-de Rham homology and the associated graded Hochschild--de Rham homology agree. We show that if $X$ has finitely many symplectic leaves, then $\MhX$ is in a sense holonomic and hence deduce a finite generation result about Hochschild--de Rham homology. Finally, in the smooth setting, we define the Hochschild--de Rham cohomology of a quantisation and conjecture that the Hochschild--de Rham (co)homology of the canonical Kontsevich quantisation of the Poisson structure is isomorphic to the Poisson-de Rham (co)homology of $X$.
+\end{abstract}
+
+
+\section{Introduction}
+
+Let $X$ be an affine Poisson variety (not necessarily smooth) over an algebraically closed field of characteristic 0 (such as $\mathbb{C}$). Denote $\mathcal{O}(X)$ its ring of functions and $\{-,-\}$ its Poisson structure.  A \textit{star product} $\star$ on $\OXh$ is a $\mathbb{C}\doubleh$-bilinear associative unital (with unit the constant function 1) map $\OXh\times\OXh\to\OXh$, such that $f\star g=fg \mod \hbar$. Therefore there is a sequence of maps $\phi_i:\mathcal{O}(X)\times\mathcal{O}(X)\to\mathcal{O}(X)$ with $$f\star g=fg+\sum\limits_{i\geq 1} \hbar^i\phi_i(f,g)\in \OXh.$$   Furthermore, if each $\phi_i$ is a  bi-differential operator, we call $\star$ a \textit{differential star product}. Note that, if $X$ is smooth, then it was shown in \cite[Theorem 8.2]{Deformations_of_Affine_Varieties_and_the_Deligne_Crossed_Groupoid} that every star product is gauge equivalent to a differential star product. It is an interesting question if there exists a similar statement in the non-smooth case to the aforementioned result of Yekutieli. Thus from now on, we assume all of our star products are differential star products.
+
+A \textit{deformation quantisation} of $(\mathcal{O}(X),\{-,-\})$ is by definition $\OXh$ with a star product such that $\phi_1(f,g)-\phi_1(g,f)=\{f,g\}$. We denote it as $\OhX=(\OXh,\star)$.\\
+
+In order to study the Poisson structure $\{-,-\}$ (equivalently $\pi\in\Gamma(X,\bigwedge^2 TX)$) (resp. its deformation), it is natural to consider the Poisson homology (resp. Hochschild homology). Let us recall the definition and some of the features of Poisson homology and Hochschild homology here. 
+
+Poisson homology can be defined in at least two ways: one using the cotangent complex $\mathbb{L}_X$ with the differential $d_\text{Poiss}:=L_\pi=[d_{dR},i_\pi]$ and one using a double complex. The latter is closely related to the Hochschild complex $HC_\bullet(A,A):=(T^{\geq 1}_k A, d_\text{Hoch})$. The zeroth Poisson homology $\HP_0(X,\pi)$ is given by $\mathcal{O}(X)/\{\mathcal{O}(X),\mathcal{O}(X)\}$, which is the vector space dual to the \textit{Poisson traces} $\{f:\mathcal{O}(X)\to \mathbb{C}|f(\{a,b\})=0 \text{ for all } a,b\in \mathcal{O}(X)\}$. The zeroth Hochschild homology $\HH_0(\OXh)$ is given by $\OhX/[\OhX,\OhX]$. Higher homologies have less clearer interpretations.
+
+One may also ask about Poisson cohomology or Hochschild cohomology. In certain cases, for example the unimodular case, there is a duality between Poisson homology and cohomology, and in the Calabi--Yau case, between Hochschild homology and cohomology. We focus on the homology theory in this paper.\\
+
+Although the zeroth Poisson homology of $X$ is globally defined, it can be obtained from a local object. In particular, in \cite[Definition 2.2]{Poisson_Traces_and_D-Modules_on_Poisson_Varieties} an explicit $D$-module on $X$ was defined which encodes the zeroth Poisson homology. This is the main idea in their paper. We recall the definition here:
+
+\begin{definition}
+$M(X):= (\Ham_X) \backslash D_X$, where the submodule $(\Ham_X)$ is the images of $D_X$ of the span of `Hamiltonian endomorphisms' $\ad_{\{\cdot,\cdot\}}(\mathcal{O}(X))\in \Diff(X)$ under the isomorphism $\End(D_X)\cong \Diff(X)$.
+\end{definition}
+
+Here and below, $N\backslash M$ denotes the (right) quotient module for $N$ a submodule of $M$. We use right modules because they behave more naturally with the $D$-module-theoretic pushforward, which we will need later, see below.
+
+We recall the definition of $D_X$ here. When $X$ is smooth, it is just the ring of differential operators $\Diff(X)$ on $X$. When $X$ is not smooth, we follow Kashiwara's approach. As $X$ is affine, we can embed $X$ into some affine $Y$ as a closed subset. Then define $D_X:=I_X\Diff(Y)\backslash\Diff(Y)$ as a right $D$-module. This construction is independent of the choice of the embedding in the sense that it is unique up to a unique isomorphism when we choose a different closed embedding. On a singular variety $X$ we refer only to $D$-modules, without specifying right or left, as the category of $D$-modules on $X$ is abstractly defined only
+up to canonical equivalence, and in general does not identify with modules over any sheaf of rings
+on $X$ itself. However to perform concrete computations, we can use right $D$-modules on $Y$ that are supported on $X$, see for example \cite[Section 1.7.2]{Introduction_to_algebraic_D-modules} or \cite{On_the_derived_ring_of_differential_operators_on_a_singularity}. We use right modules because they behave more naturally with the $D$-module-theoretic pushforward, which we will need later, see below.
+
+In \cite{Poisson_Traces_and_D-Modules_on_Poisson_Varieties}, the authors used this $D$-module to define the so called \textit{Poisson-de Rham} homology of $X$: $\HP^{dR}_{i}(\mathcal{O}(X)):=H^{-i}\pi_*M_X$, where $\pi_*$ is the $D$-module theoretic derived pushforward from $X$ to a point.\footnote{In \cite{Poisson_Traces_and_D-Modules_on_Poisson_Varieties} they used the notation $\HP^{dR}_i(X)$, but here we prefer $\HP^{dR}_i(\mathcal{O}(X))$ notation to be consistent with $\HH^{dR}_i(\OhX)$, defined in Section \ref{definition}.} It was shown in their paper that $\HP_0(\mathcal{O}(X))=\HP^{dR}_{0}(\mathcal{O}(X))$. Both the definition of the $D$-module and Poisson-de Rham homology make sense for non-affine $X$.\\
+
+In this paper, we generalise the construction $M(X)$ for an affine Poisson variety $X$ to $\MhX$ for a quantisation $\OhX$ of $\mathcal{O}(X)$. $\MhX$ represents invariants under quantised Hamiltonians. Following a similar idea defining the Poisson-de Rham homology in \cite{Poisson_Traces_and_D-Modules_on_Poisson_Varieties}, we use $\MhX$ to define \textit{Hochschild--de Rham} homology $\HH^{dR}_i(\OhX)$ of $\OhX$. This gives a local enhancement of Hochschild homology of quantisations. Hochschild--de Rham homology has nice features such as it is bounded and well-behaved for quantisations of symplectic singularities.
+
+The construction in this paper can also be extended to non-affine varieties simply by gluing these $\MhX$ together for a sheaf of quantisations. 
+
+The paper is structured as follows:
+
+In Section \ref{definition}, we define $\MhX$ and use it to define the Hochschild--de Rham homology of a quantisation. We show it agrees with the usual Hochschild homology in degree 0. We prove there is a canonical surjection $\MhX\twoheadrightarrow \MXh$ of $D_X\doubleh$ modules. We also study the case when $X$ is smooth symplectic, then the canonical surjection becomes an isomorphism and hence we deduce that the Hochschild--de Rham homology agrees with the usual Hochschild homology in this case. 
+
+In Section \ref{Symplectic_Resolutions}, we study $\MhX$ in the case of (conical) symplectic resolution, generalising the smooth symplectic case. We deduce that $\gr_\hbar\HH^{dR}_i(\OhX)$ and $\HP^{dR}_i(\mathcal{O}(X))[\hbar]$ are isomorphic. In particular, we see that in most cases $HH_0(\OhX)$ in independent of the quatisation. 
+
+In Section \ref{Holonomicity}, we study the holonomicity of $\MhX$. More specifically we prove that $\MhX/\hbar^n$ is holonomic for all $n$ if $X$ has finitely many symplectic leaves and hence deduce finite generation of Hochschild homology in certain cases.
+
+In Section \ref{Kontsevich_Formality}, we study the smooth case and define Hochschild--de Rham cohomology of a quantisation and conjecture an isomorphism between the Hochschild--de Rham (co)homology of the canonical Kontsevich quantisation of the Poisson structure and the Poisson-de Rham (co)homology of $X$.\\
+
+\textbf{Acknowledgments.} The author would like to gratefully thank his supervisor Travis Schedler for his full support during this project and Amnon Yekutieli for directing us to his result. The author would also like to thank Dan Kaplan for useful discussions and various suggestions. 
+
+\section{Hochschild--de Rham Homology}\label{definition}
+
+Because of the bi-differential operator assumption on our star product, we can also define the following quantised version of $M(X)$:
+\begin{definition}
+Define $M_\hbar(X):=(\Ham_{\hbar,X})\backslash D_X\doubleh$, where the submodule $(\text{Ham}_{\hbar,X})$ is the image of $D(X)\doubleh$ of the span of `quantum Hamiltonian endomorphisms' $\frac{1}{\hbar}\ad_{[\cdot,\cdot]_\star}(\mathcal{O}(X))\in \Diff(X)\doubleh$ under the isomorphism $\End(X)\doubleh\cong\Diff(X)\doubleh$ (this makes sense because $\star$ is commutative mod $\hbar$), where ${[\cdot,\cdot]_\star}$ is given by the commutator of $\star$.
+\end{definition}
+
+We now relate our $D$-module $\MhX$ to Hochschild homology of the quantisation. Let $p:X\to \Spec \mathbb{C}$ and $M$ a $D$-module on $X$, then denote $p_* M=M\otimes_{D_X\doubleh}^\mathbb{L}\OXh$ the $D$-module-theoretic pushforward for formal families. 
+
+\begin{lemma}
+$$H^0p_*M_\hbar(X)[\hbar^{-1}]=\HH_0(\OhX[\hbar^{-1}]),$$ and $$H^0p_*M_\hbar(X)=\OhX/\hbar^{-1}[\OhX,\OhX]\cong\hbar\cdot \HH_0(\OhX).$$ 
+\end{lemma}
+
+
+\begin{proof}
+We prove the second statement (which obviously implies the first):
+\begin{center}
+    \begin{align*}
+        H^0p_*M_\hbar(X)=&M_\hbar(X)\otimes_{D_X\doubleh}\mathcal{O}(X)\doubleh\\
+        =&(\Ham_{\hbar,X}) \backslash D_X\doubleh\otimes_{D_X\doubleh}\mathcal{O}(X)\doubleh\\
+        =&\frac{1}{h}[\mathcal{O}(X)\doubleh,\mathcal{O}(X)\doubleh]_{\star}\backslash \mathcal{O}(X)\doubleh\\
+        \cong&\hbar \cdot \HH_{0}(\OhX),
+    \end{align*}
+\end{center}
+where in the last step  we used the fact that the multiplication map $\OhX\xrightarrow{\cdot \hbar} \hbar \OXh$ is an isomorphism of vector spaces.
+\end{proof}
+
+%Hence, $\gr_\hbar \HH_0(\OhX)=\mathcal{O}(X)\bigoplus H^0p_*M_\hbar(X)$.
+
+We now proceed to define the \textit{Hochschild--de Rham} homology, following the idea of Poisson-de Rham homology in \cite{Poisson_Traces_and_D-Modules_on_Poisson_Varieties}.
+
+\begin{definition}
+We define $\HH^{dR}_{i}(\OhX):=H^{-i}p_*M_\hbar(X)$.
+\end{definition}
+
+\begin{remark}(Different versions of the Hochschild--de Rham homology)
+
+%The definition is maybe abusive since $\HH^{dR}_0(\OhX)\not = \HH_0(\OhX)$, but rather $\HH^{dR}_0(\OhX)\cong \hbar \cdot \HH_0(\OhX)$.
+
+It is perhaps more natural to define $M_\hbar(X)$ as the quotient of $D_X\doubleh$ by $\overline{(\text{Ham}_{\hbar,X})}$ the closure of the submodule ($\Ham_{\hbar,X}$). Call this version $\overline{M_\hbar(X)}$. It follows that $\overline{M_\hbar(X)}={M_\hbar(X)}/\bigcap_m \hbar^m M_\hbar(X)$. Indeed, this is because 
+\begin{align*}
+    P\in \overline{(\Ham_{\hbar,X})}\iff& \text{for all } m\geq 0, \exists P_m\in (\text{Ham}_{\hbar,X}) \text{ such that }\hbar^m|P-P_m, \\
+    \iff&  \text{for all } m\geq 0, \Image(P) \text{ of } \overline{(\text{Ham}_{\hbar,X})}\hookrightarrow D_X\doubleh\twoheadrightarrow \MhX\\
+    &\text{satisfies } \hbar^m|\Image(P).
+\end{align*}
+The advantage is that $\overline{\MhX}$ is complete. And this allows us to define $\overline{\HH}^{dR}_i(X)\\:=H^{-i}p_*\overline{M_\hbar(X)}$.
+
+It is perhaps even more natural to define $\widehat{\HH}^{dR}_i(\OhX):= H^{-i}\hat{p}_*\overline{\MhX}$, where $\hat{p}_*\overline{\MhX}$ is the completed tensor product $\overline{\MhX}\widehat{\otimes}_{D(X)\doubleh}^\mathbb{L}\OXh$. A similar calculation to the above shows that $$\overline{\MhX}\widehat{\otimes}_{D(X)\doubleh}^\mathbb{L}\OXh\cong (\MhX\otimes^{\mathbb{L}}_{D_X\doubleh}\OXh)^{\wedge},$$ where the wedge $^\wedge$ at the end denotes completion with respect to the $\hbar$-adic topology. In other words, $\widehat{\HH}^{dR}_i(\OhX)$ is the completion of $\HH^{dR}_i(\OhX)$ with respect to the $\hbar$-adic topology. 
+
+When the deformation quantisation lives in $\mathbb{C}[\hbar]$ rather than $\mathbb{C}\doubleh$, the situation is nicer and we will not need to worry about all different versions of the Hochschild--de Rham homology. 
+\end{remark}
+
+We now relate our $\MhX$ to $M(X)$.
+
+\begin{theorem}\label{canonical_surjection}
+There is a canonical surjection
+\begin{equation}\label{star}\tag{$\dagger$}
+    M(X)[\hbar]\twoheadrightarrow \gr_{\hbar-\text{adic}}M_{\hbar}(X). 
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $W\subset V$ filtered vector spaces, there is always a canonical surjection $\gr V/\gr W \twoheadrightarrow \gr(V/W)$, therefore we have a surjection  $$\gr_\hbar(\text{Ham}_{\hbar,X})\backslash \gr_\hbar D_X\doubleh \twoheadrightarrow\gr_\hbar ((\text{Ham}_{\hbar,X})\backslash D_X\doubleh).$$ In general for any filtered subset $R\subset V$ we always have $(\gr R)\subset \gr( R )$, where $(R )$ means the smallest submodule containing $R$, therefore $(\text{Ham}_X)[\hbar]\subset\gr_\hbar(\text{Ham}_{\hbar,X})$ and $$M(X)[\hbar]\twoheadrightarrow  \gr_\hbar(\text{Ham}_{\hbar,X})\backslash\gr_\hbar D_X\doubleh.$$ Composing the two surjections completes the proof. 
+\end{proof}
+
+\begin{remark}
+By taking the underived direct image to a point we recover that $\HP^{dR}_0(X)[\hbar]\twoheadrightarrow \gr_\hbar \HH^{dR}_0(\mathcal{O}_\hbar(X))\cong \hbar\gr_\hbar \HH_0(\mathcal{O}_\hbar(X))$.
+\end{remark}
+
+We can improve the canonical surjection when $X$ is smooth symplectic. In this case, it is known in \cite[Example 2.6]{Poisson_Traces_and_D-Modules_on_Poisson_Varieties} that $M(X)\cong \Omega_X$. We also get the same statement for $\MhX$:
+
+\begin{lemma}
+If $X$ is smooth symplectic with $\pi\in \bigwedge^2TX$ its Poisson structure, then $M_\hbar(X)\cong \Omega_X\doubleh$.
+\end{lemma}
+
+\begin{proof}
+We first construct a map  $\phi:\MhX\to\Omega_X\doubleh$. As $(X,\pi)$ is smooth symplectic,  Dolgushev showed that for any $\pi_h=\sum_i \pi_i \hbar^i$ with $\pi_1=\pi$, there exists a
+formal power series of top degree forms $\omega_\hbar= \sum_i \omega_i\hbar^i \in \Omega^{\dim X}(X)\doubleh$, starting with a nowhere vanishing form $\omega_0$, such that $\mathcal{L}_{\pi_\hbar}\omega_\hbar = 0$ (\cite[Section 3, Proposition 3.1]{The_Van_den_Bergh_duality_and_the_modular_symmetry_of_a_Poisson_variety}). Choose $\pi_\hbar$ to be the canonical formal Poisson structure according to Kontsevich's Formality Theorem. Let $\MhX\to\Omega_X\doubleh$ be the map that sends $1$ to $\omega_\hbar$, this is well-defined because the equation $\mathcal{L}_{\pi_\hbar}\omega_\hbar = 0$ implies that $di_{\pi_\hbar}\omega_\hbar=0$ and hence $$\ad_\star f\cdot \omega_\hbar:=\mathcal{L}_{(\ad_\star f)}\omega_\hbar=di_{\pi_\hbar(df,-)}\omega_\hbar=d(i_{\pi_\hbar}\omega_\hbar\wedge df)=0.$$ Since $\Omega$ is irreducible and $\phi$ is non-zero mod $\hbar$, \cite{Poisson_Traces_and_D-Modules_on_Poisson_Varieties} showed that the map $D_X\doubleh\twoheadrightarrow \MhX\to \Omega\doubleh$ is surjective mod $\hbar$. Because both modules are complete, one can show inductively on degree of $\hbar$ that this map is surjective. As this surjection factorises through $\phi$, $\phi$ is also surjective. To show it is injective, we consider the associated graded map $\gr_\hbar M_\hbar(X)\twoheadrightarrow \gr_\hbar\Omega_X\doubleh$. By the aforementioned result in \cite{Poisson_Traces_and_D-Modules_on_Poisson_Varieties}, $\gr_\hbar\Omega_X\doubleh\cong M(X)[\hbar]$. But by Theorem \ref{canonical_surjection}, there is also a surjection $ M(X)[\hbar]\twoheadrightarrow\gr_{\hbar}M_{\hbar}(X)$. As they are finitely-generated, and surjective endomorphisms of finitely-generated modules over Noetherian rings are automorphisms, they must be isomorphic, hence $\Omega_X[\hbar]\cong\gr_\hbar\MhX$. 
+
+As we do not know if $\MhX$ is Hausdorff yet, this does not imply that the isomorphism holds on the filtered level. Taking the inverse limit, the above implies that $\Omega_X\doubleh\cong \overline{\MhX}$, to get the statement we want, we need to show the submodule generated by $\text{Ham}_{\hbar,X}$ is a closed submodule in the smooth symplectic case. To do this, we need a formal local calculation. By the algebraic Darboux's theorem, formally locally, the symplectic structure is equivalent to the standard structure on $\mathbb{A}^{2n}=\Spec\mathbb{C}[x_1,\dots,x_n,y_1,\dots,y_n]$ and the deformation quantisation is gauge equivalent to the \textit{Moyal--Weyl} product that satisfies $\ad_\star x_i=\frac{\partial}{\partial y_i}=\ad x_i$. With respect to the Moyal--Weyl profuct, formally locally, elements of $(\Ham_X\doubleh)$ are of the form $\sum \ad x_i \cdot P_i$ where $P_i\subset D_X\doubleh$. Indeed, one containment is clear, the other containment is by Leibniz rule. Similarly, formally locally $(\Ham_{\hbar}(X))$ can be written as $\sum_i(\ad_\star x_i) P_i$, where $P_i\in D(X)\doubleh$; again one containment is clear, the other containment uses the fact that $x_i$'s still generate $\mathcal{O}(X)\doubleh$ under the $\star$-product and $\star$-multiple with any element is a bi-differential operator. Hence the gauge equivalence induces an automorphism of $D(X)\doubleh$ sending $(\Ham_X\doubleh)$ to $(\Ham_{\hbar,X})$, and $(\Ham_{\hbar,X})$ is locally closed as $(\Ham_X\doubleh)$ is. Since $X$ is a variety, $(\Ham_{\hbar,X})$ is closed.
+\end{proof}
+
+\begin{lemma}
+$$\HH_\bullet^{dR}(\OhX[\hbar^{-1}])\cong H^{\dim X-\bullet}(X,\mathbb{C}((\hbar))),$$ for $X$ smooth symplectic.
+\end{lemma}
+
+\begin{proof}
+This follows from taking hypercohomology of the $D$-module theoretic derived pushforward from $X$ to a point of both sides of the equation in the previous Lemma and using the \textit{Spencer} resolution of $\Omega_X$ (see \cite{D-modules_perverse_sheaves_and_representation_theory}) to resolve the right hand side. 
+\end{proof}
+
+\begin{corollary}
+$$\HH_\bullet^{dR}(\OhX[\hbar^{-1}])\cong \HH_\bullet(\OhX[\hbar^{-1}]),$$ for $X$ smooth symplectic.
+\end{corollary}
+
+\begin{proof}
+By results of Nest-Tsygan and Brylinski (\cite[Theorem A2.1]{Algebraic_index_theorem}, \cite{A_differential_complex_for_Poisson_manifolds}), $\HH_\bullet(\mathcal{O}_\hbar(X)[\hbar^{-1}])\cong H^{\dim X-\bullet}(X,\mathbb{C}((\hbar)))\cong \HP_\bullet(X)((h))$, now the Corollary follows from the previous Lemma.
+\end{proof}
+
+
+
+\section{Symplectic Resolutions}\label{Symplectic_Resolutions}
+It follows that if the canonical surjection equation (\ref{star}) in Theorem \ref{canonical_surjection} is an isomorphism, we have that $$\HP^{dR}_\bullet(X)[\hbar]\cong H^\bullet(M(X)[\hbar]\otimes^{\mathbb{L}}_{D_X[\hbar]}\mathcal{O}(X)[\hbar])\cong H^\bullet(\gr_\hbar M_\hbar(X)\otimes^{\mathbb{L}}_{D_X[\hbar]}\mathcal{O}(X)[\hbar]),$$ Note that there is a spectral sequence $$\gr_\hbar M_\hbar(X)\otimes^{\mathbb{L}}_{D_X[\hbar]}\mathcal{O}(X)[\hbar]\implies \gr_\hbar (M_\hbar(X)\otimes^{\mathbb{L}}_{D_X[\hbar]}\mathcal{O}(X)[\hbar]).$$
+
+Hence if the canonical surjection in equation (\ref{star}) is an isomorphism, then we have a Brylinski-type spectral sequence $$\HP^{dR}_\bullet(X)[\hbar]\implies \gr \HH^{dR}_\bullet(X).$$
+
+We already know that $M(X)[\hbar]\cong\gr_\hbar M_{\hbar}(X)$ when $X$ is smooth symplectic. And the spectral sequence degenerates as it can be identified with the classical Brylinski spectral sequence. 
+
+We want to generalise the situation from symplectic smooth to \textit{symplectic resolution}. Before proving the next theorem, we first recall the definition:
+
+\begin{definition}
+A \textit{symplectic singularity} is an irreducible algebraic variety $X$ over $\mathbb{C}$ equipped with a smooth projective resolution $\rho:\Tilde{X}\to X$ such that:
+\begin{itemize}
+    \item $X$ is normal;
+    \item there is a non-degenerate symplectic form $\omega_{reg} \in H^0(X^{reg}, \Omega^2)$ on the smooth locus $X^{reg}\subset X$;
+    \item for some ($\iff$ every) projective resolution $\rho:\Tilde{X}\to X$, $\rho^*\omega_{reg}$ extends to $\Tilde{X}$ (possibly degenerate). 
+\end{itemize}
+We say $\rho:\Tilde{X}\to X$ as above is a \textit{symplectic resolution} if $\rho^*\omega_{reg}$ is non-degenerate (\textit{i.e.}, symplectic); $\rho$ is \textit{conical} if it is a $\mathbb{C}^*$-equivariant map.
+\end{definition}
+
+In general, we always have that $\rho:\Tilde{X}\to X$ is a symplectic resolution $\implies$ $X$ is a symplectic singularity $\implies$ $X$ has finitely many symplectic leaves. See \cite{Symplectic_singularities_from_the_Poisson_point_of_view}. 
+
+We will work with conical symplectic resolutions.
+
+It has been conjectured in \cite[Section 6]{Poisson_traces_D-modules_and_symplectic_resolutions} that $\rho_* \Omega_{\Tilde{X}}\cong M(X)$ and this has been proven in many cases (see the aforementioned reference for a list). It is known that the conjecture fails in some cases, see \cite[Remark 2.15]{On_categories_O_of_quiver_varieties_overlying_the_bouquet_graphs}. In cases the conjecture holds then we have the following result.
+
+\begin{theorem}\label{SymResMainTheorem}
+If $\rho:\Tilde{X}\twoheadrightarrow X$ is a symplectic resolution such that $\rho_* \Omega_{\Tilde{X}}\cong M(X)$ then $M(X)[\hbar]\cong \gr M_\hbar(X)$. Moreover this can be strengthened to the statement that $\overline{M_h(X)} \to M(X)[[h]] \cong \rho_* \Omega_{\tilde X}[[h]]$ is an isomorphism.
+\end{theorem}
+
+To prove this, we need to use the existence of deformation quantisation $\mathfrak{X}$ of $X$ and the extension $\Tilde{\rho}:\Tilde{\mathfrak{X}}\twoheadrightarrow \mathfrak{X}$ of $\rho$. It's construction is done by Kaledin, and the existence is guaranteed when $X$ is affine (in general it works for $X$ to be \textit{admissible}: $H^i_{dR}(\Tilde{X})\to H^i_{dR}(\Tilde{X})$ is surjective for $i=1,2$). Furthermore, he shows that $\mathfrak{X}$ is normal if $X$ is normal and flat over the formal disk $\Delta:=\Spec\mathbb{C}[[t]]$, and that generically $\Tilde{\rho}$ restricts to an isomorphism of smooth, affine, symplectic varieties. This family of maps over $\Delta$ is called the \textit{twistor} family (see \cite{Geometry_and_topology_of_symplectic_resolutions}). We have the following commutative diagram (which is a Cartesian square)
+
+\begin{center}
+    \begin{tikzcd}
+\Tilde{X} \arrow[r, "\Tilde{i}", hook] \arrow[d, "\rho", two heads] & \Tilde{\mathfrak{X}} \arrow[d, "\Tilde{\rho}", two heads] \\
+X \arrow[r, "i", hook]                                   & \mathfrak{X}                              
+\end{tikzcd}
+\end{center}
+
+\begin{proof}
+Consider the canonical surjection $M(\mathfrak{X})[\hbar]\twoheadrightarrow \gr M_\hbar(\mathfrak{X})$, let $K$ be its kernel. Therefore we have the short exact sequence $$0\to K\to M(\mathfrak{X})[\hbar]\to \gr M_\hbar(\mathfrak{X})\to 0.$$ Since the canonical map is generically an isomorphism, the kernel $K$ must be supported at $t=0$. Therefore if $M(\mathfrak{X})$ is $t$-torsion free, then $K=0$. And hence $M(\mathfrak{X})[\hbar]\cong \gr M_\hbar(\mathfrak{X})$, quotienting by $t$ we get $M(X)[\hbar]\cong \gr M_\hbar(X).$
+
+To show $M(\mathfrak{X})$ is $t$-torsion free, consider $M_0(\mathfrak{X}):=M(\mathfrak{X})/K'$, where $K'$ is the $t^m$-torsion part of $M(\mathfrak{X})$ for all $m$. Abusing the notation, also let $K'$ be its restriction to $M(X)$ and set $M_0(X):=M(X)/K'$. It is $t$-torsion free and hence flat. Hence after quotienting by $t$ we get $$0\to K'/tK'\to M(X)\to M_0(X)\to 0.$$ If $M(X)=\rho_*\Omega_{X}$ and we know from \cite[Corollary 3.6]{Poisson-de_Rham_homology_of_hypertoric_varieties_and_nilpotent_cones} that $M_0(X)\cong\rho_*\Omega_{X}$ (non-canonically) and $M(X)\to M_0(X)$ is a surjection of finite length modules as they are holonomic, we have that $K'/tK'=0$, hence $K'$ is $t^m$ torsion which implies $K'=0$ hence $K=0$ as $K\subset K'[\hbar].$
+
+To get rid of gr, as it is proved in \cite{Poisson-de_Rham_homology_of_hypertoric_varieties_and_nilpotent_cones} that Ext$^1(M(X),M(X))=0$, we know that there are no non-trivial formal deformations of $M(X)\doubleh$. Therefore we just need to prove $\overline{\MhX}$ is a formal deformation. But we have that $\MhX/\hbar^m\cong \MXh/\hbar^m$ as $D_X\doubleh/\hbar^m$ modules (since Ext$^1(M(X),M(X))=0$), the result follows as $\overline{\MhX}$ is an inverse limit.
+\end{proof}
+
+By applying the underived pushforward $H^0\pi_*$, we easily see that:
+
+\begin{corollary}
+if $X$ admits a symplectic resolution and $\rho_*\Omega_{\Tilde{X}}\cong M(X)$ then $\HP^{dR}_\bullet(X)[\hbar] \cong\gr \HH^{dR}_\bullet(\OhX)\cong \overline{\HH}^{dR}_\bullet(\OhX)\cong H^{\dim X-\bullet}(\Tilde{X},\mathbb{C}[\hbar])$. 
+\end{corollary}
+
+\begin{example}
+If the symplectic singularities of $X$ are any of the usual ones we understand (not \cite{On_categories_O_of_quiver_varieties_overlying_the_bouquet_graphs} counterexample which is for quiver varieties with loops), then hypothesis of Theorem \ref{SymResMainTheorem} holds.
+
+In particular for symmetric powers of symplectic surfaces, also symplectic singular surfaces. The singularities of these are all of the type: $Sym^n (X)$ for some $n$ and $X$ a du Val singularity, or products of such.
+
+We also know the conjecture holds for nilpotent cones, Slodowy slices of nilpotent orbits in the whole cone. And for hypertoric varieties.
+
+It is conjectured that it holds for quiver varieties of quivers without loops.
+\end{example}
+
+\begin{remark}
+One can also upgrade the conjecture to that $\MhX[\hbar^{-1}] \cong \rho_* \Omega_{\tilde{X}}(\!( \hbar )\!)$ for a symplectic resolution $\rho:\Tilde{X}\to X$ and that $\HH^{DR}_i(X) \cong H^{\dim X - i} (\tilde{X}, \mathbb{C}(\!( \hbar )\!))$, for every quantisation.
+\end{remark}
+
+
+\section{Holonomicity}\label{Holonomicity}
+
+It is known that if $X$ has finitely many symplectic leaves then $M(X)$ is holonomic as a $D_X$-module \cite[Theorem 1.1]{Poisson_Traces_and_D-Modules_on_Poisson_Varieties}. We also get a similar result for $\MhX$. To shorten the notation, by $\MhX/\hbar^n$ we mean $\MhX/\hbar^n\MhX$. 
+
+%\begin{definition}
+%Let $R$ be a $k$-algebra. A $D_X\otimes_k R$-mod $M$ is holonomic if it is finitely-generated and $\dim_{\Spec R}\supp(\gr M)=\dim X$, where $\dim_{\Spec R}$ is taken inside of $T^*X\times \Spec R$.
+%\end{definition}
+
+%If $M$ is holonomic as a $D_X$-module, then $M\otimes R$ is holonomic as a $D_X\otimes R$-mod. As usual, holonomicity is preserved by submodules, quotients and extensions. 
+
+
+\begin{proposition}
+When $X$ has finitely many symplectic leaves, $\MhX/\hbar^n $ is a holonomic $D_X$-module for all $n$.
+\end{proposition}
+
+
+\begin{proof}
+From the canonical surjection (\ref{star}), we get that $$M(X)[\hbar]/\hbar^n\twoheadrightarrow (\gr_\hbar \MhX)/\hbar^n$$ is a surjective homomorphism of $D$-modules. and since surjection preserves holonomicity and $(\gr_\hbar \MhX)/\hbar^n\cong \gr_\hbar (\MhX/\hbar^n)$, we see that $\gr_\hbar (\MhX/\hbar^n)$ is a holonomic $D$-module. Therefore by the extension property $\MhX/\hbar^n$ is also a holonomic $D$-module.
+
+\end{proof}
+
+
+\begin{theorem}
+If $X$ has finitely many symplectic leaves then $\widehat{\HH}^{dR}_\bullet(\OhX)$ is finitely-generated over $\mathbb{C}\doubleh$.
+\end{theorem}
+
+\begin{proof}
+By considering a protective resolution of $\mathcal{O}(X)$, the short exact sequence $0\to\hbar^n\MhX\to \MhX\to \MhX/\hbar^n\to 0$ induces a short exact sequence 
+\begin{align*}
+    0\to\hbar^n \MhX\otimes^{\mathbb{L}}_{D_X\doubleh}\OXh\to&\MhX\otimes^{\mathbb{L}}_{D_X\doubleh}\OXh\\
+    \to& \MhX/\hbar^n \otimes^{\mathbb{L}}_{D_X\doubleh}\OXh\to 0
+\end{align*}
+ of filtered complexes. As the first term has filtered degree $\geq n$, we have that $\gr_{<n} \pi_* \MhX\cong \gr_{<n} \pi_* \MhX/\hbar^n$, taking the inverse limit yields that $\gr \HH^{dR}_{\bullet}(\OhX)\cong\gr \widehat{\HH}_{\bullet}^{dR}(\OhX)$. \\
+
+We know that $$\gr_i \MhX =\hbar^i\MhX/\hbar^{i+1}\MhX\twoheadrightarrow \gr_{i+1} \MhX =\hbar^{i+1}\MhX/\hbar^{i+2}.$$ Since each $\gr_i \MhX$ is holonomic (hence has finite length), there is an integer $N$ such that $\gr_N \MhX \cong \gr_{N+i} \MhX $ for all $i>0$. Thus $\pi_* (\gr \MhX)$ is finitely-generated over $\mathbb{C}[\hbar]$ by $\pi_* \gr_i\MhX, i\leq N$. Since there is a spectral sequence $\pi_*(\gr\MhX)\implies\gr(\pi_*\MhX)$, $\gr \HH^{dR}_{\bullet}(\OhX)$ must also be finitely-generated and hence $\widehat{\HH}^{dR}_\bullet(\OhX)$ is topologically finitely-generated over $\mathbb{C}\doubleh$. Hence also finitely generated over $\mathbb{C}\doubleh$.
+\end{proof}
+
+We also get following standard corollary:
+
+\begin{corollary}
+If $X$ is an affine Poisson variety which has finitely many symplectic leaves, and $\OhX$ is a deformation quantisation, then $\HH^{dR}_\bullet(\OhX)$ is finitely-generated over $\mathbb{C}\doubleh$. In particular $\HH_0(\OhX[\hbar^{-1}])$ is finite dimensional over $\mathbb{C}((\hbar))$ and $\OhX[\hbar^{-1}]$ has finitely many finite dimensional representations.
+\end{corollary}
+
+
+
+
+
+\section{Kontsevich Formality}\label{Kontsevich_Formality}
+Now assume further that $X$ is smooth affine. Kontsevich formality theorem says that there is a $L_\infty$ quasi-isomorphism $$T_{\text{poly}}\xrightarrow{L_\infty}D_{\text{poly}},$$ where $T_{\text{poly}}:=(\bigwedge^\bullet_{\mathcal{O}(X)}T^1(X))[1]$ is the dgla of (shifted) polyvector fields on $X$ and $D_{\text{poly}}:=C^\bullet(\mathcal{O}(X))[1]$ is the dgla of (shifted) Hochschild chains on $X$ (computing Hochschild cohomology of $\mathcal{O}(X)$). The Poisson structure $\pi$ is an MC element on the left hand side, we can form the MC twisting and get an $L_\infty$ quasi-isomorphism $$(T_{\text{poly}},d_\pi)\xrightarrow{L_\infty}(D_{\text{poly}},d_{\text{Hoch}_\hbar}),$$ where $d_{\text{Hoch}_\hbar}=d_{\text{Hoch}}+[\mu_\hbar-\mu,\cdot]$, $\mu_\hbar$ is the Kontsevich quantisation. This is well-known and it follows that $$\HP^\bullet(\mathcal{O}(X)((\hbar)), \pi_\hbar) \xrightarrow{\sim} \HH^\bullet(\mathcal{O}(X)((\hbar)),\star).$$
+
+A similar version involving homology is also true. 
+
+We conjecture that a similar statement involving Poisson-de Rham and Hochschild--de Rham homology is true:
+
+\begin{conjecture}
+When $\OhX$ is the Kontsevich quantisation, then $$\HP^{dR}_\bullet(X)[\hbar^{-1}]\cong \HH^{dR}_\bullet (\OhX)[\hbar^{-1}].$$
+\end{conjecture}
+
+Recall one version of the Kontsevich formality theorem says that there is a $L_\infty$ quasi-isomorphism $$(\Omega_{\text{poly}},\mathcal{L}_\pi)\xrightarrow{L_\infty}D_{\text{poly}},$$ where $\Omega_{\text{poly}}:=(\bigwedge^\bullet_{\mathcal{O}(X)}\Omega^1(X))[1]$ is the dgla of (shifted) differential forms on $X$ and  $D_{\text{poly}}:=C^\bullet(\OhX)[1]$ is the dgla of (shifted) Hochschild chains on $\OhX$ (computing Hochschild homology of $\OhX$). 
+
+It is tempting to write down a `proof' of this conjecture by considering tensoring this quasi-isomorphism with $D_X\doubleh$, and get that $$\Omega_{\text{poly}}\otimes_{\mathcal{O}(X)\doubleh}D_X\doubleh\xrightarrow{\sim}D_{\text{poly}}\otimes_{{\mathcal{O}(X)\doubleh}}D_X\doubleh.$$ Take $H^0$ of both sides, we get $M(X)\doubleh\xrightarrow{\sim}M_\hbar(X)$ and the conjecture follows. However, this proof is wrong as the maps $d_\pi$ and $d_{\text{Hoch}_\hbar}$ are not $\mathcal{O}_X$-linear hence we won't get a complex of $D$-modules.
+\bibliographystyle{alpha}
+{\footnotesize
+\bibliography{Bibliography}}
+\end{document}
