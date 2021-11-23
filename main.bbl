@@ -1,0 +1,74 @@
+\begin{thebibliography}{{Kal}03}
+
+\bibitem[BCEY]{Introduction_to_algebraic_D-modules}
+Alexander Braverman, Tatyana Chmutova, Pavel Etingof, and David Yang.
+\newblock Introduction to algebraic {$D$}-modules.
+\newblock \url{http://math.mit.edu/~xxu/Course/18.748/EtingofLec.pdf}.
+\newblock Accessed: 2020.
+
+\bibitem[Bry88]{A_differential_complex_for_Poisson_manifolds}
+Jean-Luc Brylinski.
+\newblock {A differential complex for {P}oisson manifolds}.
+\newblock {\em Journal of Differential Geometry}, 28(1):93 -- 114, 1988.
+
+\bibitem[Dol09]{The_Van_den_Bergh_duality_and_the_modular_symmetry_of_a_Poisson_variety}
+Vasiliy Dolgushev.
+\newblock The {V}an den {B}ergh duality and the modular symmetry of a {P}oisson
+  variety.
+\newblock {\em Selecta Mathematica}, 14(2):199--228, 2009.
+
+\bibitem[ES09]{Poisson_Traces_and_D-Modules_on_Poisson_Varieties}
+Pavel Etingof and Travis Schedler.
+\newblock Poisson traces and {$D$}-modules on {P}oisson {V}arieties.
+\newblock {\em Geometric and Functional Analysis}, 20:958--987, 2009.
+
+\bibitem[ES17]{Poisson_traces_D-modules_and_symplectic_resolutions}
+Pavel Etingof and Travis Schedler.
+\newblock Poisson traces, {$D$}-modules, and symplectic resolutions.
+\newblock {\em Letters in Mathematical Physics}, 108(3):633–678, Dec 2017.
+
+\bibitem[HTT08]{D-modules_perverse_sheaves_and_representation_theory}
+Ryoshi Hotta, Kiyoshi Takeuchi, and Toshiyuki Tanisaki.
+\newblock {\em {$D$}-modules, perverse sheaves, and representation theory},
+  volume 236 of {\em Progress in Mathematics}.
+\newblock Birkh\"{a}user Boston, Inc., Boston, MA, 2008.
+\newblock Translated from the 1995 Japanese edition by Takeuchi.
+
+\bibitem[{Kal}03]{Symplectic_singularities_from_the_Poisson_point_of_view}
+D.~{Kaledin}.
+\newblock {Symplectic singularities from the {P}oisson point of view}.
+\newblock {\em arXiv Mathematics e-prints}, page math/0310186, October 2003.
+
+\bibitem[Kal09]{Geometry_and_topology_of_symplectic_resolutions}
+D~Kaledin.
+\newblock Geometry and topology of symplectic resolutions.
+\newblock {\em Algebraic geometry—Seattle 2005. Part}, 2:595--628, 2009.
+
+\bibitem[NT95]{Algebraic_index_theorem}
+Ryszard Nest and Boris Tsygan.
+\newblock {Algebraic index theorem}.
+\newblock {\em Communications in Mathematical Physics}, 172(2):223 -- 262,
+  1995.
+
+\bibitem[PS17]{Poisson-de_Rham_homology_of_hypertoric_varieties_and_nilpotent_cones}
+Nicholas Proudfoot and Travis Schedler.
+\newblock Poisson-de {R}ham homology of hypertoric varieties and nilpotent
+  cones.
+\newblock {\em Selecta Mathematica}, 23, 01 2017.
+
+\bibitem[Tsv19]{On_categories_O_of_quiver_varieties_overlying_the_bouquet_graphs}
+Boris Tsvelikhovskiy.
+\newblock On categories $\mathcal{O}$ of quiver varieties overlying the bouquet
+  graphs, 2019.
+
+\bibitem[Yan21]{On_the_derived_ring_of_differential_operators_on_a_singularity}
+Haiping Yang.
+\newblock On the derived ring of differential operators on a singularity.
+\newblock 2021.
+
+\bibitem[Yek12]{Deformations_of_Affine_Varieties_and_the_Deligne_Crossed_Groupoid}
+Amnon Yekutieli.
+\newblock Deformations of affine varieties and the {D}eligne crossed groupoid,
+  2012.
+
+\end{thebibliography}

@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: alpha.bst
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+Database file #1: Bibliography.bib
+Warning--empty journal in On_the_derived_ring_of_differential_operators_on_a_singularity
+You've used 13 entries,
+            2543 wiz_defined-function locations,
+            651 strings with 7527 characters,
+and the built_in function-call counts, 4790 in all, are:
+= -- 485
+> -- 188
+< -- 9
++ -- 60
+- -- 59
+* -- 315
+:= -- 773
+add.period$ -- 39
+call.type$ -- 13
+change.case$ -- 73
+chr.to.int$ -- 13
+cite$ -- 14
+duplicate$ -- 202
+empty$ -- 360
+format.name$ -- 79
+if$ -- 986
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 11
+newline$ -- 68
+num.names$ -- 39
+pop$ -- 77
+preamble$ -- 1
+purify$ -- 87
+quote$ -- 0
+skip$ -- 185
+stack$ -- 0
+substring$ -- 273
+swap$ -- 39
+text.length$ -- 9
+text.prefix$ -- 7
+top$ -- 0
+type$ -- 100
+warning$ -- 1
+while$ -- 43
+width$ -- 16
+write$ -- 165
+(There was 1 warning)
